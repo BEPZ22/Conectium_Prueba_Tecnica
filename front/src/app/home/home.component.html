@@ -1,0 +1,10 @@
+<div class="row mt-5">
+    <h3>Usuarios que han hecho uso de esta prueba</h3>
+    <div class="col-md-1 mb-3" *ngFor="let user of users">
+        <div class="card text-center">
+            <div class="card-body">
+                <p class="card-text">{{user.name}} {{user.last_name}}</p>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,5 +1,5 @@
 sq = require('../loader/sequealize');
-const passport = require('./validator/passport');
+const passport = require('../loader/passport');
 
 module.exports = {
 
@@ -26,13 +26,33 @@ module.exports = {
                 });
             })(req, res, next);
         } catch (err) {
+            return res.json({ logged: false, error: "error", message: err }).status(400);
+        }
+    },
+
+    check_if_logged: async(req, res, next) => {
+        try {
+            let user = await sq.models.User.findOne({
+                attributes: ['id', 'name', 'last_name', 'email', ],
+                where: {
+                    email: req.session.passport.user
+                },
+            })
+
+            return res.json({ logged: true, message: "El usuario está loggeado", user: user }).status(200)
+        } catch (err) {
             logger.error(err.stack)
             return res.json({ logged: false, error: "error", message: err }).status(400);
         }
     },
 
-    logout: async (req, res) =>{
-
-    }
+    logout: async(req, res, next) => {
+        try {
+            req.logout()
+            return res.json({ logged: false, message: "Sesión terminada con éxito" }).status(200)
+        } catch (err) {
+            return res.json({ logged: false, error: "error", message: err }).status(400);
+        }
+    },
 
 }

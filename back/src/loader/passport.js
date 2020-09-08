@@ -1,7 +1,7 @@
 const passport = require('passport'),
-    LocalStrategy = require('passport-local').Strategy;
+LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
-sq = require('../../loader/sequealize');
+sq = require('../loader/sequealize');
 
 passport.use(new LocalStrategy({
         usernameField: 'email',
@@ -14,7 +14,7 @@ passport.use(new LocalStrategy({
                 email: email,
             }
         });
-        // console.log("aqio :" + result)
+
         if (result !== null) {
 
             const user = result.get({ plain: true });

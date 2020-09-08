@@ -13,11 +13,10 @@ module.exports = async() => {
 
     const User = userModel(sq, sequelize.Sequelize);
 
-    await sq.sync({ force: true });
+    await sq.sync({ force: false });
 
     let models = {
-        sq,
-        User
+        sq
     }
 
     return models

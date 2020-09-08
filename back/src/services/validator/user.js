@@ -3,13 +3,13 @@ Joi = require('joi')
 const create_schema = Joi.object({
     name: Joi.string()
         .alphanum()
-        .min(3)
+        .min(2)
         .max(30)
         .required(),
 
     last_name: Joi.string()
         .alphanum()
-        .min(3)
+        .min(2)
         .max(30)
         .required(),
 
